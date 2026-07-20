@@ -1,0 +1,52 @@
+---
+//import { string } from 'astro:schema';
+import Header from '../components/Header.astro';
+import '@fontsource/alata';
+
+//propiedades
+interface Props {
+    title?: string;
+    description?: string;
+}
+
+const {
+    title = "Tienda de mudanza",
+    description = "Somo empreza lider en mudanza de la CDMX"
+} = Astro.props
+
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>{title}</title>
+        <meta name="description" content={description}/>
+        <meta name="viewport" content="width=device-width"/>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <Header />
+        <main>
+            <slot />
+        </main>
+    </body>
+</html>
+
+<style is:global>
+    body{
+        font-family: 'Alata', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+    main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+   
+    
+</style>

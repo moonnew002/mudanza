@@ -1,0 +1,61 @@
+<header class="header">
+    <a>LOGOTIPO</a>
+    <nav class="nav">
+        <a class="ejemplo" href="/">Inicio</a>
+        <a class="ejemplo" href="#servicios">Servicios</a>
+        <a class="ejemplo" href="/nosotros">Sobre nosotros</a>
+        <a class="ejemplo" href="#cotizador">Cotizador</a>
+        <button>Menu</button>
+    </nav>
+</header>
+
+<style>
+    button{
+        display: none;
+    }
+    .header{
+        color:black;
+        box-sizing: border-box;
+        position: sticky;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        top: 0;
+        z-index: 1;
+        width: 100%;
+        height: 60px;
+        padding-left: 15px;
+        padding-right: 15px;
+        background-color: #e24e42;
+        font-size: 1.1rem;
+    }
+
+    .nav {
+        display: flex;
+        gap: 30px;
+        
+    }
+    .nav a{
+        text-decoration: none;
+        font-weight: 500;
+        color: white;
+    }
+
+    .nav a:visited{
+        color: white;
+    }
+    @media (width <= 550px) {
+        .ejemplo{
+            display: none;
+        }
+        button{
+            display: block;
+        }
+  /* Estilos para móviles */
+    }
+
+@media (width >= 750px) {
+  /* Estilos para escritorio */
+}
+    
+</style>

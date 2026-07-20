@@ -1,0 +1,323 @@
+<div class="contenedor-titulo">
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home-question"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M20.136 11.136l-8.136 -8.136l-9 9h2v7a2 2 0 0 0 2 2h7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2c.467 0 .896 .16 1.236 .428" /><path d="M19 22v.01" /><path d="M19 19a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg>      
+<h2>Cotizador</h2>
+</div>
+
+    <p>Es fácil, solo rellena los datos...</p>
+    <div id="cotizador-layout">
+
+        <form id="form-cotizador" class="cotizador-columna" method="post" action="procesar_cotizacion.php">
+    
+          <fieldset id="formulario">
+            <input class="item-formulario" type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            <input class="item-formulario" type="email" id="correo" name="correo" placeholder="Correo electrónico" required>
+            <input class="item-formulario" type="tel" id="telefono" 
+                    name="telefono" 
+                    placeholder="Teléfono" 
+                    pattern="^\+?[0-9]{8,15}$" 
+                    required>
+            <input class="item-formulario" type="text" id="direccion-origen" name="direccion-origen" placeholder="Dirección de origen" required>
+            <input class="item-formulario" type="text" id="direccion-destino" name="direccion-destino" placeholder="Dirección de destino" required>
+            <input class="item-formulario" type="text" id="edificio-origen" name="edificio-origen" placeholder="Edi
+ficio y piso de origen" required>
+            <input class="item-formulario" type="text" id="edificio-destino" name="edificio-destino" placeholder="E
+dificio y piso de destino" required>
+            <select class="item-formulario" name="servicio" id="tipo-servicio">
+              <option value="residencial">Residencial</option>
+              <option value="bodega">Bodega</option>
+              <option value="regresos">Regresos a CDMX</option>
+              <option value="corporativa">Corporativa</option>
+              <option value="fletes">Fletes</option>
+              <option value="compartida">Compartida</option>
+            </select>
+            <input class="item-formulario" type="date" id="fecha" name="fecha">
+            <textarea class="item-formulario" id="detalles" name="detalles" placeholder="Cuéntanos más detalles de 
+tu mudanza" required></textarea>
+            <button class="item-formulario" type="submit" id="enviar">
+  <span class="btn-texto">Enviar solicitud de presupuesto</span>
+</button>
+          </fieldset>
+          <div id="popup">
+            <h3>¡Gracias por tu cotización!</h3>
+            <p>hemos recibido tus datos. Nos pondremos en contacto contigo lo más pronto posible.</p>
+            <button id="cerrar-popup">Cerrar</button>
+          </div>
+        </form>
+                   
+        <div class="cotizador-columna" id="correciones">
+          <div id="mapa"></div>
+        </div>
+      </div>
+
+<style>
+	.contenedor-titulo{
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+	}
+    h2{
+		font-size: 2.5rem;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+    
+    #cotizador-layout{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.contacto-layout {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+
+.cotizador-columna{ /* corregir la altura para que alcance el mapa */
+  flex: 1 1 400px;
+  box-sizing: border-box;
+  background: white;
+  border-radius: 10px;
+
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+}
+
+#form-cotizador{
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 10px;
+}
+
+#formulario{
+  display: grid;
+  box-sizing: border-box;
+  grid-template-areas: 
+  "nombre nombre"
+  "correo telefono"
+  "direccion-origen direccion-destino"
+  "edificio-origen edificio-destino"
+  "tipo-servicio fecha"
+  "detalles detalles"
+  "detalles detalles"
+  "enviar enviar"
+  ;
+  gap: 15px;
+  grid-auto-rows: 45px;
+  border: none;
+  margin: 0;
+  padding: 0px;
+  width: 100%;
+  min-width: 0; /* Nuestra corrección anterior */
+}
+
+#nombre{
+  grid-area: nombre;
+}
+#correo{
+    grid-area: correo;
+}
+#telefono{
+    grid-area: telefono;
+}
+#direccion-origen{
+    grid-area: direccion-origen;
+}
+#direccion-destino{
+    grid-area: direccion-destino;
+}
+#edificio-origen{
+    grid-area: edificio-origen;
+}
+#edificio-destino{
+    grid-area: edificio-destino;
+}
+#tipo-servicio{
+    grid-area: tipo-servicio;
+}
+#detalles{
+  grid-area: detalles;
+}
+
+.item-formulario{
+  padding: 0px;
+  box-sizing: border-box;
+  height: 100%;
+  min-width: 0;
+
+  padding: 10px 15px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 15px; /* Tamaño ideal para evitar zoom automático en móviles */
+  color: #333;
+  background-color: #f8fafc; /* Gris muy clarito para el fondo */
+  border: 1px solid #cbd5e1; /* Borde sutil */
+  border-radius: 8px; /* Bordes amigables */
+  transition: all 0.3s ease; /* Animación fluida */
+  outline: none;
+}
+.item-formulario:focus {
+  background-color: #ffffff;
+  border-color: #2563eb; /* Azul brillante */
+  /* Resplandor exterior azulado */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); 
+}
+
+#popup {
+  display: none;
+}
+
+#enviar{
+    background-color: #f97316; /* Naranja enérgico, ideal para mudanzas */
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(249, 115, 22, 0.3);
+    grid-area: enviar;
+    position: relative;
+  overflow: hidden; /* Evita que la animación de relleno se salga de los bordes */
+  /* Mantén los estilos que ya tenías: */
+  transition: background-color 0.3s ease;
+}
+#enviar:hover {
+  background-color: #ea580c; /* Naranja un poco más oscuro */
+  transform: translateY(-2px); /* Efecto de que el botón se levanta */
+  box-shadow: 0 6px 12px rgba(249, 115, 22, 0.4);
+}
+
+/* Efecto al presionar el botón */
+#enviar:active {
+  transform: translateY(0);
+}
+
+/* =========================================
+   ANIMACIONES DEL BOTÓN DE ENVIAR
+   ========================================= */
+
+
+#enviar .btn-texto {
+  position: relative;
+  z-index: 2;
+}
+
+#enviar::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 0%;
+  background-color: #22c55e; /* Verde éxito */
+  z-index: 1;
+  transition: width 2s ease-in-out; /* Duración de la animación de llenado */
+}
+
+/* CLASES DINÁMICAS QUE AGREGARÁ JAVASCRIPT */
+#enviar.cargando {
+  pointer-events: none; /* Evita múltiples clics */
+}
+
+#enviar.cargando::before {
+  width: 100%; /* Inicia la animación de relleno */
+}
+
+#enviar.exito {
+  background-color: #22c55e;
+  pointer-events: none;
+}
+
+#enviar.error {
+  background-color: #ef4444; /* Rojo error */
+  animation: vibrar 0.4s ease-in-out; /* Efecto visual de error */
+}
+
+@keyframes vibrar {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+
+
+#mapa{
+  height: 100%;
+  width: 100%;
+}
+@media (width <= 550px) {
+        #formulario{
+            grid-template-areas: 
+                "nombre nombre"
+                "correo correo"
+                "telefono telefono"
+                "direccion-origen direccion-origen"
+                "direccion-destino direccion-destino"
+                "edificio-origen edificio-origen"
+                "edificio-destino edificio-destino"
+                "tipo-servicio fecha"
+                "detalles detalles"
+                "detalles detalles"
+                "enviar enviar"
+            ;
+        }
+        
+  /* Estilos para móviles */
+    }
+
+
+</style>
+<script>
+  // Seleccionamos el formulario y el botón
+  const form = document.getElementById('form-cotizador');
+  const btn = document.getElementById('enviar');
+  const btnTexto = btn.querySelector('.btn-texto');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Evita que la página se recargue
+
+    // 1. Estado inicial: Cargando
+    btn.classList.remove('exito', 'error');
+    btn.classList.add('cargando');
+    btnTexto.textContent = 'Enviando...';
+
+    try {
+      // 2. Enviamos los datos al PHP usando Fetch API
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData
+      });
+
+      if (response.ok) {
+        // 3a. Estado de Éxito
+        btn.classList.remove('cargando');
+        btn.classList.add('exito');
+        btnTexto.textContent = '¡Solicitud enviada!';
+        form.reset(); // Limpia los campos del formulario
+      } else {
+        throw new Error('El servidor devolvió un error');
+      }
+
+    } catch (error) {
+      // 3b. Estado de Error
+      btn.classList.remove('cargando');
+      btn.classList.add('error');
+      btnTexto.textContent = 'Error al enviar';
+      
+      // Mostramos la alerta que pediste
+      alert('Hubo un problema de conexión al intentar enviar tu solicitud. Por favor, revisa tus datos o intenta más tarde.');
+
+      // Restauramos el botón después de 3 segundos para que puedan intentar de nuevo
+      setTimeout(() => {
+        btn.classList.remove('error');
+        btnTexto.textContent = 'Enviar solicitud de presupuesto';
+      }, 3000);
+    }
+  });
+</script>

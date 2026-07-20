@@ -1,0 +1,50 @@
+---
+import BotonesInicio from '../components/BotonesInicio.astro';
+---
+<div class="principal">
+
+	<section id="inicio" class="contenedor">
+		<h1>Mudanzas Luna</h1>	
+		<p>Descubre nuestros servicio aqui abajo.</p>
+		<BotonesInicio/>
+	</section>	
+</div>
+
+
+<style>
+	
+	.principal{
+        box-sizing: border-box;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		/*align-items: flex-start; /* para evitar el strech */
+		background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/principal.webp'); 
+  /* queda aprender a como ajustar el brillo */
+  		background-size: cover;       /* Ajusta la imagen para que cubra todo el contenedor */
+  		background-position: center;  /* Centra la imagen para que no se corte raro */
+  		background-repeat: no-repeat; /* Evita que la imagen se duplique en mosaico */
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+	h1{
+		margin: 15px;
+		font-size: 4rem;
+		color: white;
+		margin: 0;
+	}
+	p{
+		margin: 0;
+		font-size: 1.5rem;
+		color: white;
+	}
+	.contenedor{ /* aquí iria el fondo de la empresa */
+		max-width: 1200px;
+		width: 100%;
+		gap: 10px;
+		box-sizing: border-box;
+		padding: 15px;
+	}
+	
+
+</style>

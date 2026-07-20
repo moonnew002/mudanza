@@ -1,0 +1,147 @@
+---
+import Layout from "../layouts/Layout.astro"
+//import { string } from 'astro:schema';
+import BanerPrincipal from "../components/BanerPrincipal.astro"
+import Servicios from "../components/Servicios.astro"
+import Cotizador from "../components/Cotizador.astro"
+import Footer from "../components/Footer.astro"
+---
+
+<Layout title="Inicio">
+	<BanerPrincipal/>
+	<section class="contenedor">
+      <div class="presentacion__layout">
+        <p class="presentacion__columna">Un proceso simple, limpio y transparente</p>
+        <ol class="presentacion__columna">
+          <li class="item-presentacion-columna">
+			<div class="contenedor-titulo">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-truck-delivery">
+	<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+	<path d="M5 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+	<path d="M15 17a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+	<path d="M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5" />
+	<path d="M3 9l4 0" />
+</svg>
+
+            <h3>Cotiza</h3>
+			</div>
+
+            <p>Cuéntanos tus necesidades y obtén una propuesta a tu medida.</p>
+          </li>
+          <li class="item-presentacion-columna">
+			<div class="contenedor-titulo">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-checklist"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
+
+            <h3>Planeamos</h3>
+			</div>
+            <p>Organizamos cada detalle de tu traslado.</p>
+          </li>
+          <li class="item-presentacion-columna">
+            <h3>Trasladamos</h3>
+            <p>Ejecutamos con seguridad, tecnología y personal capacitado.</p>
+          </li>
+          <li class="item-presentacion-columna">
+            <h3>Entregamos</h3>
+            <p>Tu tranquilidad es nuestra prioridad.</p>
+          </li>
+			<li class="item-presentacion-columna">
+            <h3>Satisfacción</h3>
+            <p>Tu tranquilidad es nuestra prioridad.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+	<section id="servicios" class="contenedor">
+		<Servicios/>
+	</section>
+	<section id="cotizador" class="contenedor">
+		<Cotizador/>
+	</section>
+	<Footer/>
+
+</Layout>
+
+<style>
+	:root{
+		--color--primario: #e24e42;
+		--color-secundario: #008f95;
+		--color-terciario: #e9b000;
+		--color-acento: #eb6e80;
+	}	
+	.contenedor-titulo{
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+	}
+	.contenedor-titulo{
+		display: flex;
+		align-items: center;
+	}
+	h2{
+		font-size: 2.5rem;
+	}
+	ol, li, ul {
+    	list-style: none;
+		padding: 0;
+	}
+	a {
+		text-decoration: none;
+	}
+	.efecto-sombreado {
+  		box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  		transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transición suave para interactividad */
+	}
+
+	/* Efecto sutil al pasar el mouse por las tarjetas */
+	.efecto-sombreado:hover {
+  		transform: translateY(-2px);
+  		box-shadow: 0 12px 40px 0 black; /* Brillo verde neón muy tenue */
+	}
+
+	.contenedor{ /* aquí iria el fondo de la empresa */
+		max-width: 1200px;
+		width: 100%;
+		gap: 30px;
+		box-sizing: border-box;
+		padding: 15px;
+	}
+	.presentacion__layout{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 30px;
+	}
+	.presentacion__columna:first-child{
+		flex-basis: 300px;
+		flex-grow: 1;
+		margin: 0; /* esto por el parrafo */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-block: 30px;
+	}
+	.presentacion__columna:last-child{
+		margin: 0;
+		flex-basis:800px;
+		flex-grow: 1;
+		display: grid;
+		grid-template-columns: repeat(
+			auto-fit, minmax(250px, 1fr)
+		);
+		grid-auto-rows: 170px;
+		box-sizing: border-box;
+		gap: 15px;
+	}
+	.item-presentacion-columna{
+		box-sizing: border-box;
+		padding: 10px;
+		border-radius: 12px;
+	}
+
+	.presentacion__columna > *{
+		border: 1px solid black;
+	}
+	
+
+	
+</style>
